@@ -5,3 +5,4 @@ assets/css/
 assets/js/
 *.zip
 languages/*.pot
+CHANGELOG.md
