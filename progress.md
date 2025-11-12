@@ -20,7 +20,7 @@
 10. **Unit Tests**: cobertura para Posts Maintenance (scan, metas, edge cases, filtros, repetibilidade).
 
 ## Plano High-Level
-- **Fase 1 (Infra/Build):** Resolver packaging (#1) e documentar abordagem; ajustar composer/npm ignorando o que nao deve ir para o zip.
+- **Fase 1 (Infra/Build) ✅**: Packaging otimizado (Grunt copia apenas runtime, vendor incluso, docs/testes fora), webpack configurado com externals e Babel preset declarado; `npm run build` concluindo e zip reduzido.
 - **Fase 2 (Drive Backend):** Completar endpoints (#3-#6) antes do front-end para garantir APIs estaveis. Incluir seguranca (nonce/capabilities) e estrategia de armazenamento de tokens.
 - **Fase 3 (Drive Front-End):** Implementar a UI React (#2) consumindo os endpoints finalizados, com i18n completa e feedback ao usuario.
 - **Fase 4 (Posts Maintenance):** Criar servicos compartilhados para scan, pagina admin (#7), agendamentos e processamento assinc + comando WP-CLI (#8).
@@ -32,6 +32,6 @@
 - Definir como o background processing sera feito (WP Cron, Action Scheduler, WP Background Processing, etc.).
 
 ## Next Immediate Actions
-1. Investigar pastas que devem ser excluidas do zip (node_modules/src/tests/etc.) e preparar estrategia de build (#1).
-2. Especificar modelo de dados para armazenar credenciais e tokens com seguranca.
-3. Detalhar arquitetura do Posts Maintenance worker (cron + wp-cli compartilhando mesma service class).
+1. Especificar modelo de dados para armazenar credenciais e tokens com seguranca.
+2. Detalhar arquitetura do Posts Maintenance worker (cron + wp-cli compartilhando mesma service class).
+3. Definir endpoints concretos do Drive (payloads, validacoes, erros) antes de implementar a UI React.

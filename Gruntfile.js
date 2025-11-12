@@ -4,22 +4,14 @@ module.exports = function (grunt) {
 	const copyFiles = [
 		'app/**',
 		'core/**',
+		'assets/**',
 		'languages/**',
+		'vendor/**',
 		'uninstall.php',
 		'wpmudev-plugin-test.php',
-		'!vendor/**',
-		'!**/*.map',
-		'QUESTIONS.md',
-		'README.md',
 		'composer.json',
-		'package.json',
-		'Gruntfile.js',
-		'gulpfile.js',
-		'webpack.config.js',
-		'phpcs.ruleset.xml',
-		'phpunit.xml.dist',
-		'src/**',
-		'tests/**',
+		'composer.lock',
+		'README.md',
 	]
 
     const excludeCopyFilesPro = copyFiles
@@ -28,7 +20,8 @@ module.exports = function (grunt) {
 			'changelog.txt',
 		])
 
-	const changelog = grunt.file.read('.changelog')
+	const changelogPath = '.changelog'
+	const changelog = grunt.file.exists(changelogPath) ? grunt.file.read(changelogPath) : ''
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),

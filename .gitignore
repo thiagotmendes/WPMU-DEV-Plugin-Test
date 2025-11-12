@@ -1,2 +1,7 @@
 node_modules
 vendor
+build/
+assets/css/
+assets/js/
+*.zip
+languages/*.pot
