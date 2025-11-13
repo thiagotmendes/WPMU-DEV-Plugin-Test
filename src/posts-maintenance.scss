@@ -1,0 +1,43 @@
+.wpmudev-pm-app {
+	.wpmudev-pm-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		gap: 24px;
+		margin-top: 24px;
+	}
+
+	.wpmudev-pm-section {
+		margin-bottom: 20px;
+
+		&__title {
+			margin: 0 0 8px;
+			font-weight: 600;
+		}
+	}
+
+	.wpmudev-pm-progress {
+		margin: 12px 0;
+
+		&__bar {
+			background: #f0f0f0;
+			border-radius: 999px;
+			height: 12px;
+			margin-bottom: 8px;
+			overflow: hidden;
+		}
+
+		&__indicator {
+			background: #17a8e3;
+			height: 100%;
+			transition: width 200ms ease;
+		}
+	}
+
+	.wpmudev-pm-meta {
+		margin-top: 12px;
+	}
+
+	.wpmudev-pm-status {
+		font-size: 15px;
+	}
+}

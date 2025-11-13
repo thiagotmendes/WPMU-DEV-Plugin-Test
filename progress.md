@@ -31,7 +31,14 @@
     - [x] Implementar handlers de credenciais/autenticacao com `apiFetch`, nonces e notificacoes traduciveis.
     - [x] Construir UI de upload, criacao de pasta, listagem com paginacao e botoes de download/visualizacao.
     - [x] Exibir estados de carregamento, mensagens de sucesso/erro e atualizacao automatica apos operacoes.
-- [ ] **Fase 4 (Posts Maintenance):** Criar servicos compartilhados para scan, pagina admin (#7), agendamentos e processamento assinc + comando WP-CLI (#8).
+- [x] **Fase 4 (Posts Maintenance):** Criar servicos compartilhados para scan, pagina admin (#7), agendamentos e processamento assinc + comando WP-CLI (#8).
+    - [x] Definir um service central de varredura (ex.: `Posts_Maintenance_Service`) responsável por descobrir post types válidos, processar lotes e atualizar `wpmudev_test_last_scan`.
+    - [x] Implementar endpoints/AJAX que inicializam scans, consultam progresso e impedem execuções simultâneas quando um job estiver em andamento.
+    - [x] Criar página “Posts Maintenance” no admin com filtros de post type, botão “Scan Posts”, progresso visual e log da última execução.
+    - [x] Adotar Action Scheduler, WP Background Processing ou cron customizado para dividir o processamento em lotes e permitir retomadas.
+    - [x] Registrar tarefa cron diária reutilizando o mesmo service, incluindo parâmetros padrão e registro do horário da última execução automática.
+    - [x] Construir comando WP-CLI (`wp wpmudev scan-posts`) que aceite parâmetros (`--post_types`, `--batch-size`), reutilize o service e exiba barra/resumo.
+    - [x] Persistir metadados de jobs (total, processados, filtros, timestamps) em opções/transients para alimentar admin, cron e CLI com o mesmo estado.
 - [ ] **Fase 5 (Compat/Tests):** Implementar isolamento de dependencias (#9) e escrever testes PHPUnit (#10). Finalizar com revisao de documentacao e instrucoes de build.
 
 ## Assumptions & Questions

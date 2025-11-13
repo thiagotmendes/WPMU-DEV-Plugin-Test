@@ -92,7 +92,14 @@ final class Loader extends Base {
 	 * @return void
 	 */
 	private function init() {
+		Posts_Maintenance_Service::instance()->init();
 		App\Admin_Pages\Google_Drive::instance()->init();
+		App\Admin_Pages\Posts_Maintenance::instance()->init();
 		Endpoints\V1\Drive_API::instance()->init();
+		Endpoints\V1\Posts_Maintenance::instance()->init();
+
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			CLI\Posts_Maintenance_Command::register();
+		}
 	}
 }

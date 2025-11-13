@@ -27,6 +27,14 @@ if ( ! class_exists( 'WPMUDEV\\PluginTest\\Drive_Service' ) && file_exists( __DI
 	require_once __DIR__ . '/core/class-drive-service.php';
 }
 
+if ( ! class_exists( 'WPMUDEV\\PluginTest\\Posts_Maintenance_Service' ) && file_exists( __DIR__ . '/core/class-posts-maintenance-service.php' ) ) {
+	require_once __DIR__ . '/core/class-posts-maintenance-service.php';
+}
+
+if ( ! class_exists( 'WPMUDEV\\PluginTest\\App\\Admin_Pages\\Posts_Maintenance' ) && file_exists( __DIR__ . '/app/admin-pages/class-posts-maintenance.php' ) ) {
+	require_once __DIR__ . '/app/admin-pages/class-posts-maintenance.php';
+}
+
 
 // Plugin version.
 if ( ! defined( 'WPMUDEV_PLUGINTEST_VERSION' ) ) {

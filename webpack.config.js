@@ -1,7 +1,7 @@
 const path = require('path')
 const TerserPlugin = require('terser-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const defaultConfig = require("@wordpress/scripts/config/webpack.config");
 
 const wpExternals = {
@@ -22,6 +22,7 @@ module.exports = {
     },
 	entry: {
 		'drivetestpage': './src/googledrive-page/main.jsx',
+		'posts-maintenance': './src/posts-maintenance.jsx',
 	},
 
 	output: {

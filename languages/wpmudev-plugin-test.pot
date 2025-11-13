@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-13T00:31:08+00:00\n"
+"POT-Creation-Date: 2025-11-13T23:07:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 
@@ -31,6 +31,33 @@ msgstr ""
 #: app/admin-pages/class-googledrive-settings.php:89
 #: assets/js/drivetestpage.min.js:654
 msgid "Google Drive Test"
+msgstr ""
+
+#: app/admin-pages/class-posts-maintenance.php:70
+#: app/admin-pages/class-posts-maintenance.php:71
+#: app/admin-pages/class-posts-maintenance.php:110
+msgid "Posts Maintenance"
+msgstr ""
+
+#: app/admin-pages/class-posts-maintenance.php:111
+msgid "Scan public posts and pages in the background to update their maintenance timestamp."
+msgstr ""
+
+#: app/class-posts-maintenance-cli.php:64
+msgid "A scan is already running. Retry once it has completed."
+msgstr ""
+
+#: app/class-posts-maintenance-cli.php:74
+msgid "Starting Posts Maintenance scan…"
+msgstr ""
+
+#: app/class-posts-maintenance-cli.php:80
+msgid "Scanning posts"
+msgstr ""
+
+#. translators: 1: processed count 2: total count 3: post types
+#: app/class-posts-maintenance-cli.php:119
+msgid "Scan completed: %1$d/%2$d posts updated (%3$s)."
 msgstr ""
 
 #: app/endpoints/v1/class-googledrive-rest.php:88
@@ -107,12 +134,24 @@ msgstr ""
 msgid "Folder name is required."
 msgstr ""
 
+#: app/endpoints/v1/class-posts-maintenance-rest.php:77
+msgid "You are not allowed to manage posts maintenance."
+msgstr ""
+
 #: core/class-drive-service.php:152
 msgid "Google Drive credentials are not configured."
 msgstr ""
 
 #: core/class-drive-service.php:197
 msgid "Google Drive refresh token is missing. Please authenticate again."
+msgstr ""
+
+#: core/class-posts-maintenance-service.php:97
+msgid "A Posts Maintenance scan is already running. Please wait for it to finish."
+msgstr ""
+
+#: core/class-posts-maintenance-service.php:305
+msgid "No valid post types were provided for the scan."
 msgstr ""
 
 #: assets/js/drivetestpage.min.js:314
@@ -308,4 +347,90 @@ msgstr ""
 
 #: assets/js/drivetestpage.min.js:833
 msgid "Refresh Files"
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:323
+#: assets/js/posts-maintenance.min.js:329
+msgid "Not available"
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:335
+msgid "Your session expired. Refresh the page and try again."
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:410
+msgid "Unable to fetch current scan status."
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:420
+msgid "Select at least one post type to scan."
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:440
+msgid "Scan started successfully."
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:443
+msgid "Unable to start Posts Maintenance scan."
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:453
+msgid "No eligible public post types were detected."
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:502
+msgid "Scan Options"
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:507
+msgid "Post types to include"
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:514
+msgid "Batch size"
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:515
+msgid "Number of posts processed per batch (10–200)."
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:531
+msgid "Scan Posts"
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:538
+msgid "Scan Status"
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:542
+msgid "Current status:"
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:544
+msgid "idle"
+msgstr ""
+
+#. translators: 1: processed posts 2: total posts
+#: assets/js/posts-maintenance.min.js:558
+msgid "%1$d of %2$d posts processed"
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:564
+msgid "Remaining:"
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:570
+msgid "Selected types:"
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:574
+msgid "Next scheduled run:"
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:577
+msgid "Last automatic run:"
+msgstr ""
+
+#: assets/js/posts-maintenance.min.js:594
+msgid "Refresh status"
 msgstr ""
