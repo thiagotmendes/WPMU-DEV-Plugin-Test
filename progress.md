@@ -20,11 +20,19 @@
 10. **Unit Tests**: cobertura para Posts Maintenance (scan, metas, edge cases, filtros, repetibilidade).
 
 ## Plano High-Level
-- **Fase 1 (Infra/Build) ✅**: Packaging otimizado (Grunt copia apenas runtime, vendor incluso, docs/testes fora), webpack configurado com externals e Babel preset declarado; `npm run build` concluindo e zip reduzido.
-- **Fase 2 (Drive Backend):** Completar endpoints (#3-#6) antes do front-end para garantir APIs estaveis. Incluir seguranca (nonce/capabilities) e estrategia de armazenamento de tokens.
-- **Fase 3 (Drive Front-End):** Implementar a UI React (#2) consumindo os endpoints finalizados, com i18n completa e feedback ao usuario.
-- **Fase 4 (Posts Maintenance):** Criar servicos compartilhados para scan, pagina admin (#7), agendamentos e processamento assinc + comando WP-CLI (#8).
-- **Fase 5 (Compat/Tests):** Implementar isolamento de dependencias (#9) e escrever testes PHPUnit (#10). Finalizar com revisao de documentacao e instrucoes de build.
+- [x] **Fase 1 (Infra/Build):** Packaging otimizado (Grunt copia apenas runtime, vendor incluso, docs/testes fora), webpack configurado com externals e Babel preset declarado; `npm run build` concluindo e zip reduzido.
+- [x] **Fase 2 (Drive Backend – concluída):**
+    - [x] Desenhar armazenamento seguro para credenciais/tokens (opcoes separadas, criptografia opcional, autoload desligado).
+    - [x] Implementar `wpmudev/v1/drive/save-credentials` (POST) com `manage_options`, nonce, sanitizacao e persistencia padronizada.
+    - [x] Completar fluxo OAuth: endpoint `auth` (gera URL/redirect), callback validando `state`/`code`, salvando tokens e helper `ensure_valid_token()` com refresh.
+    - [x] Construir rotas `files`, `upload`, `download`, `create-folder` com validacoes, paginacao e mensagens traduziveis usando Google Client.
+    - [x] Extrair helper/servico compartilhado para inicializar Google Client e lidar com leitura/escrita de dados, retornando `WP_Error` consistentes.
+- [x] **Fase 3 (Drive Front-End):**
+    - [x] Implementar handlers de credenciais/autenticacao com `apiFetch`, nonces e notificacoes traduciveis.
+    - [x] Construir UI de upload, criacao de pasta, listagem com paginacao e botoes de download/visualizacao.
+    - [x] Exibir estados de carregamento, mensagens de sucesso/erro e atualizacao automatica apos operacoes.
+- [ ] **Fase 4 (Posts Maintenance):** Criar servicos compartilhados para scan, pagina admin (#7), agendamentos e processamento assinc + comando WP-CLI (#8).
+- [ ] **Fase 5 (Compat/Tests):** Implementar isolamento de dependencias (#9) e escrever testes PHPUnit (#10). Finalizar com revisao de documentacao e instrucoes de build.
 
 ## Assumptions & Questions
 - Precisaremos de credenciais Google sandbox para validar OAuth end-to-end durante QA.
@@ -32,6 +40,5 @@
 - Definir como o background processing sera feito (WP Cron, Action Scheduler, WP Background Processing, etc.).
 
 ## Next Immediate Actions
-1. Especificar modelo de dados para armazenar credenciais e tokens com seguranca.
-2. Detalhar arquitetura do Posts Maintenance worker (cron + wp-cli compartilhando mesma service class).
-3. Definir endpoints concretos do Drive (payloads, validacoes, erros) antes de implementar a UI React.
+1. Detalhar arquitetura do Posts Maintenance worker (cron + wp-cli compartilhando mesma service class).
+2. Definir contratos/UX da página Posts Maintenance e como refletir progresso no admin.

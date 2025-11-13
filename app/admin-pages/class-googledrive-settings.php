@@ -17,6 +17,7 @@ namespace WPMUDEV\PluginTest\App\Admin_Pages;
 defined( 'WPINC' ) || die;
 
 use WPMUDEV\PluginTest\Base;
+use WPMUDEV\PluginTest\Drive_Service;
 
 class Google_Drive extends Base {
 	/**
@@ -71,6 +72,13 @@ class Google_Drive extends Base {
 	private $unique_id = '';
 
 	/**
+	 * Drive service helper.
+	 *
+	 * @var Drive_Service
+	 */
+	private $drive_service;
+
+	/**
 	 * Initializes the page.
 	 *
 	 * @return void
@@ -79,7 +87,8 @@ class Google_Drive extends Base {
 	 */
 	public function init() {
 		$this->page_title     = __( 'Google Drive Test', 'wpmudev-plugin-test' );
-		$this->creds          = get_option( $this->option_name, array() );
+		$this->drive_service  = Drive_Service::instance();
+		$this->creds          = $this->drive_service->get_credentials();
 		$this->assets_version = ! empty( $this->script_data( 'version' ) ) ? $this->script_data( 'version' ) : WPMUDEV_PLUGINTEST_VERSION;
 		$this->unique_id      = "wpmudev_plugintest_drive_main_wrap-{$this->assets_version}";
 
@@ -153,8 +162,8 @@ class Google_Drive extends Base {
 				'restEndpointCreate'   => 'wpmudev/v1/drive/create-folder',
 				'nonce'                => wp_create_nonce( 'wp_rest' ),
 				'authStatus'           => $this->get_auth_status(),
-				'redirectUri'          => home_url( '/wp-json/wpmudev/v1/drive/callback' ),
-				'hasCredentials'       => ! empty( $this->creds['client_id'] ) && ! empty( $this->creds['client_secret'] ),
+				'redirectUri'          => $this->drive_service->get_redirect_uri(),
+				'hasCredentials'       => $this->drive_service->has_credentials(),
 			),
 		);
 	}
@@ -165,10 +174,7 @@ class Google_Drive extends Base {
 	 * @return bool
 	 */
 	private function get_auth_status() {
-		$access_token = get_option( 'wpmudev_drive_access_token', '' );
-		$expires_at   = get_option( 'wpmudev_drive_token_expires', 0 );
-		
-		return ! empty( $access_token ) && time() < $expires_at;
+		return $this->drive_service ? $this->drive_service->has_valid_token() : false;
 	}
 
 	/**

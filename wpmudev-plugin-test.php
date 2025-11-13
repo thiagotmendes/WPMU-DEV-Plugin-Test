@@ -22,6 +22,11 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	require_once __DIR__ . '/vendor/autoload.php';
 }
 
+// Ensure internal classes added after the original classmap are available even if composer dump-autoload hasn't been rerun.
+if ( ! class_exists( 'WPMUDEV\\PluginTest\\Drive_Service' ) && file_exists( __DIR__ . '/core/class-drive-service.php' ) ) {
+	require_once __DIR__ . '/core/class-drive-service.php';
+}
+
 
 // Plugin version.
 if ( ! defined( 'WPMUDEV_PLUGINTEST_VERSION' ) ) {
