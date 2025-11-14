@@ -135,6 +135,15 @@ $sui-image-path: '~@wpmudev/shared-ui/dist/images/';
     }
 }
 
+.sui-2-12-23 {
+    .sui-wrap {
+        .sui-header {
+            display: block;
+            text-align: left;
+        }
+    }
+}
+
 // Notice styling adjustments
 .components-notice {
     margin: 20px 0;
