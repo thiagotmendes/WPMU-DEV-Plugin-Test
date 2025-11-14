@@ -267,8 +267,8 @@ const WPMUDEV_DriveTest = () => {
 	};
 
 	const authInstructions = (
-		<div className="sui-box-settings-row">
-					<p>{ __( 'Please authenticate with Google Drive to proceed with the test.', 'wpmudev-plugin-test' ) }</p>
+		<div className="sui-box-settings-row drive-auth-instructions">
+			<p>{ __( 'Please authenticate with Google Drive to proceed with the test.', 'wpmudev-plugin-test' ) }</p>
 			<p><strong>{ __( 'This test will require the following permissions:', 'wpmudev-plugin-test' ) }</strong></p>
 			<ul>
 				<li>{ __( 'View and manage Google Drive files', 'wpmudev-plugin-test' ) }</li>

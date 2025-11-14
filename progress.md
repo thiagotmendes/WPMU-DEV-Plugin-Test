@@ -39,7 +39,11 @@
     - [x] Registrar tarefa cron diária reutilizando o mesmo service, incluindo parâmetros padrão e registro do horário da última execução automática.
     - [x] Construir comando WP-CLI (`wp wpmudev scan-posts`) que aceite parâmetros (`--post_types`, `--batch-size`), reutilize o service e exiba barra/resumo.
     - [x] Persistir metadados de jobs (total, processados, filtros, timestamps) em opções/transients para alimentar admin, cron e CLI com o mesmo estado.
-- [ ] **Fase 5 (Compat/Tests):** Implementar isolamento de dependencias (#9) e escrever testes PHPUnit (#10). Finalizar com revisao de documentacao e instrucoes de build.
+- [x] **Fase 5 (Compat/Tests):** Implementar isolamento de dependencias (#9) e escrever testes PHPUnit (#10). Finalizar com revisao de documentacao e instrucoes de build.
+    - [x] Composer configurado com `classmap-authoritative`, `optimize-autoloader` e script `composer test`; bootstrap re-registra o autoloader sem `prepend` para evitar conflitos com dependências globais.
+    - [x] Adicionado `bin/install-wp-tests.sh`, README atualizado com instruções (`composer install --no-dev --optimize-autoloader`, `composer test`) e documentado o fluxo de instalação do `wordpress-tests-lib`.
+    - [x] Dockerfile passa a incluir Composer, git, unzip/zip, cliente MySQL e Subversion; `docker-compose` reconstrói a imagem para que os testes possam rodar dentro do container.
+    - [x] Suite PHPUnit expandida (`tests/test-posts-maintenance-service.php`, `tests/test-api-auth.php`) cobrindo filtros, bloqueio de execuções simultâneas, batch size, casos sem posts e erro esperado da rota `/wpmudev/v1/drive/auth`.
 
 ## Assumptions & Questions
 - Precisaremos de credenciais Google sandbox para validar OAuth end-to-end durante QA.

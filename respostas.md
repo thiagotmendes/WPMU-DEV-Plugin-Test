@@ -80,16 +80,13 @@
 5. Documentar exemplos (`wp wpmudev scan-posts --post_types=post,page`) na funcao de registro e no README.
 
 ## 9. Dependency Management e compatibilidade
-1. Prefixar namespaces PHP com `WPMUDEV\Drive` e evitar funcoes globais genericas.
-2. Ajustar `composer.json` para usar `--no-dev` e `--classmap-authoritative` no build, reduzindo colisao com outras instalacoes.
-3. Considerar uso do `php-scoper` ou alternativa para isolar dependencias de terceiros contidas no plugin.
-4. Garantir que scripts JS utilizem `@wordpress/*` fornecidos pelo core via `wp_register_script` com `wp-element`, `wp-components`, etc.
-5. Documentar no README como reinstalar dependencias e a estrategia adotada para evitar conflitos.
+1. Composer agora obriga `classmap-authoritative` e `optimize-autoloader`, garantindo que o autoloader do plugin use apenas o mapa conhecido (evita que caminhos externos executem código inesperado).
+2. O `vendor/autoload.php` é carregado mas re-registrado com `prepend = false`, o que garante que dependências de outros plugins continuem com prioridade — reduz a chance de conflitos entre versões do `google/apiclient`.
+3. Documentei no README o fluxo recomendado (`composer install --no-dev --optimize-autoloader`) antes do `npm run build`, deixando claro como manter o zip final livre de dependências de desenvolvimento.
+4. A seção de Composer também explica como reinstalar dependências e por que a estratégia atual evita sobrescrever pacotes globais.
 
 ## 10. Testes unitarios
-1. Configurar ambiente de testes com `wp scaffold plugin-tests` (caso ainda nao exista) e atualizar `phpunit.xml.dist` com bootstrap do plugin.
-2. Criar classe de testes para o scanner de posts estendendo `WP_UnitTestCase`, gerando posts de diferentes tipos e status nas fixtures.
-3. Validar que cada post publico recebe `wpmudev_test_last_scan` apos a execucao do servico.
-4. Cobrir cenarios de filtro por post type, ausencia de posts e tratamento de erros simulando falhas de banco ou permissoes.
-5. Garantir idempotencia executando o scanner duas vezes e verificando que timestamps sao atualizados corretamente.
-6. Documentar comando `composer test` ou `phpunit` na instrucao de setup e integrar na pipeline de CI.
+1. Adicionei `bin/install-wp-tests.sh`, script padrão usado pelo `wp scaffold plugin-tests`, facilitando preparar o `wordpress-tests-lib` em qualquer ambiente.
+2. Ampliei `tests/test-posts-maintenance-service.php` com cenários cobrindo filtros de post type, ausência de posts, limitação de batch size e bloqueio de execuções simultâneas (WP-CLI/Admin).
+3. Há validações explícitas sobre atualização de metas, resumo final (`get_last_summary`) e mensagens de erro (`WP_Error`) quando não existem tipos válidos.
+4. Criei o script Composer `composer test` descrito no README para rodar `vendor/bin/phpunit`, garantindo repetibilidade local e no CI.

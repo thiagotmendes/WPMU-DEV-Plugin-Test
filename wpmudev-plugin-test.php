@@ -17,9 +17,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-// Support for site-level autoloading.
+// Support for site-level autoloading while keeping Composer loader scoped to this plugin.
 if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
-	require_once __DIR__ . '/vendor/autoload.php';
+	$wpmudev_plugin_test_loader = require __DIR__ . '/vendor/autoload.php';
+
+	if ( $wpmudev_plugin_test_loader instanceof \Composer\Autoload\ClassLoader ) {
+		// Re-register without prepending so other plugins' versions keep priority.
+		$wpmudev_plugin_test_loader->unregister();
+		$wpmudev_plugin_test_loader->register( false );
+	}
 }
 
 // Ensure internal classes added after the original classmap are available even if composer dump-autoload hasn't been rerun.

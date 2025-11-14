@@ -20,6 +20,24 @@ Install npm packages
 | `npm run compile`    | Compile production ready assets.                      |
 | `npm run build`  | Build production ready bundle inside `/build/` folder |
 
+## Composer & PHP dependencies
+- Execute `composer install` during development to pull both runtime and dev dependencies.  
+- Release builds should run `composer install --no-dev --optimize-autoloader` before `npm run build` so the generated zip only contains production code.  
+- Composer is configured with `classmap-authoritative` and the plugin's autoloader is re-registered without prepending, ensuring our vendor classes never override another plugin's copy of the same dependency.
+
+## Running PHPUnit tests
+1. Install the WordPress test suite (only needs to happen once per environment):
+   ```
+   bin/install-wp-tests.sh wordpress_test root root db latest
+   ```
+   Adjust the DB credentials/host if you are running outside the Docker env.
+2. Install dev dependencies and run the suite:
+   ```
+   composer install
+   composer test
+   ```
+   The `composer test` script proxies to `vendor/bin/phpunit` and exercises the Posts Maintenance worker end-to-end.
+
 ## Posts Maintenance tools
 - A nova página **Posts Maintenance** (menu principal) permite selecionar os post types públicos, definir o tamanho dos lotes e disparar um “Scan Posts” que roda em background (com feedback de progresso e próximas execuções agendadas).
 - Um cron diário reutiliza o mesmo serviço para manter a meta `wpmudev_test_last_scan` atualizada mesmo sem intervenção manual.
