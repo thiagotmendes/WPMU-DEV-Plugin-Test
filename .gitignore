@@ -6,3 +6,6 @@ assets/js/
 *.zip
 languages/*.pot
 CHANGELOG.md
+respostas.md
+progress.md
+composer.phar
